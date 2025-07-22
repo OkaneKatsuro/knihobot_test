@@ -32,7 +32,7 @@ describe('MockPriceController (e2e)', () => {
   });
 
   it('should return 404 for ISBN with even hash', async () => {
-    const isbn = '9780140328722'; // Должен вернуть 404
+    const isbn = '9780140328722'; 
     await request(app.getHttpServer())
       .get(`/mock-price?isbn=${isbn}`)
       .expect(404);

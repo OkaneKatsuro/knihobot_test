@@ -27,7 +27,7 @@ describe('MockPriceController', () => {
   });
 
   it('should return price for valid ISBN-10 (converted to ISBN-13)', async () => {
-    const isbn10 = '0000000000'; // converts to 9780000000002
+    const isbn10 = '0000000000'; 
     const result = await controller.getPrice(isbn10);
     expect(result).toHaveProperty('isbn', '9780000000002');
     expect(typeof result.price).toBe('number');
@@ -80,7 +80,7 @@ describe('MockPriceController', () => {
         notFound++;
       }
     }
-    // Ожидаем, что хотя бы 6-14 ISBN дадут цену (±20% от 50%)
+    
     expect(found).toBeGreaterThanOrEqual(6);
     expect(found).toBeLessThanOrEqual(14);
   });

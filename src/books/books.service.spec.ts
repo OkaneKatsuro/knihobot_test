@@ -17,7 +17,7 @@ describe('BooksService', () => {
   });
 
   it('should return 200 and all data for valid ISBN-13 with price and title', async () => {
-    const isbn = '9780000000002'; // mock-price вернёт цену
+    const isbn = '9780000000002'; 
     const condition = 'as_new';
     const result = await service.addBook(isbn, condition);
     expect(result.status).toBe(200);
@@ -25,12 +25,11 @@ describe('BooksService', () => {
     expect(result.data.isbn10).toBe('0000000000');
     expect(result.data.condition).toBe(condition);
     expect(typeof result.data.price).toBe('number');
-    // title может быть null, если OpenLibrary не найдёт книгу
     expect(result.data).toHaveProperty('title');
   });
 
   it('should return 200 and all data for valid ISBN-10 with price and title', async () => {
-    const isbn10 = '0000000000'; // эквивалентно 9780000000002
+    const isbn10 = '0000000000'; 
     const condition = 'damaged';
     const result = await service.addBook(isbn10, condition);
     expect(result.status).toBe(200);
@@ -42,17 +41,16 @@ describe('BooksService', () => {
   });
 
   it('should return 202 if price is not found', async () => {
-    const isbn = '9780000000001'; // mock-price вернёт 404
+    const isbn = '9780000000001'; 
     const result = await service.addBook(isbn, 'new');
     expect(result.status).toBe(202);
     expect(result.data.price).toBeNull();
   });
 
   it('should return 202 if title is not found', async () => {
-    // ISBN, для которого mock-price вернёт цену, но OpenLibrary не найдёт книгу
+    
     const isbn = '9780000000002';
-    // Для OpenLibrary большинство тестовых ISBN не найдёт книгу, поэтому title будет null
-    const result = await service.addBook(isbn, 'new');
+   const result = await service.addBook(isbn, 'new');
     if (result.data.title === null) {
       expect(result.status).toBe(202);
     } else {

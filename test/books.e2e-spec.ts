@@ -19,7 +19,7 @@ describe('BooksController (e2e)', () => {
   });
 
   it('should add book and return 200 if all data present', async () => {
-    const isbn = '9780140328721'; // валидный, mock-price вернет цену
+    const isbn = '9780140328721'; 
     const res = await request(app.getHttpServer())
       .post('/books')
       .send({ isbn, condition: 'new' })
@@ -38,14 +38,14 @@ describe('BooksController (e2e)', () => {
   });
 
   it('should return 202 if price or title is missing', async () => {
-    const isbn = '9780140328722'; // mock-price вернет 404
+    const isbn = '9780140328722'; 
     const res = await request(app.getHttpServer())
       .post('/books')
       .send({ isbn, condition: 'damaged' })
       .expect(202);
     expect(res.body.data).toHaveProperty('isbn10');
     expect(res.body.data).toHaveProperty('isbn13');
-    // price или title может быть null
+  
     expect(res.body.data.price === null || res.body.data.title === null).toBe(true);
   });
 }); 
